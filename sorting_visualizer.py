@@ -11,7 +11,18 @@ root.config(bg='orange')
 select_algorithm = StringVar()
 arr = []
 
+# GENERATING THE ARRAY
+def Generate_array():
+    global arr
+    lowest = int(lowest_Entry.get())
+    highest = int(highest_Entry.get())
+    size = int(arrsize_Entry.get())
 
+    arr = []
+    for i in range(size):
+        arr.append(random.randrange(lowest, highest + 1))
+
+    draw_rectangle(arr, ['red' for _ in range(len(arr))])
 
 # GUI CODING PART
 options_frame = Frame(root, width=700, height=200, bg='orange')
