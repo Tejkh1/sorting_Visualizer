@@ -24,6 +24,27 @@ def Generate_array():
 
     draw_rectangle(arr, ['red' for _ in range(len(arr))])
 
+# DRAWING THE ARRAY ELEMENTS AS RECTANGLES
+def draw_rectangle(arr, colorArray):
+    canvas.delete("all")
+    canvas_height = 380
+    canvas_width = 600
+    bar_width = canvas_width / (len(arr) + 1)
+    border_offset = 30
+    spacing = 10
+    normalized_array = [i / max(arr) for i in arr]
+    for i, height in enumerate(normalized_array):
+        # top left coordinates
+        x0 = i * bar_width + border_offset + spacing
+        y0 = canvas_height - height * 340
+        # bottom right coordinates
+        x1 = (i + 1) * bar_width + border_offset
+        y1 = canvas_height
+        canvas.create_rectangle(x0, y0, x1, y1, fill=colorArray[i])
+        canvas.create_text(x0 + 2, y0, anchor=SW, text=str(arr[i]))
+
+    root.update_idletasks()
+    
 # GUI CODING PART
 options_frame = Frame(root, width=700, height=200, bg='orange')
 options_frame.pack(pady=20)
