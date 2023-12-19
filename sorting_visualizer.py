@@ -24,6 +24,7 @@ def Generate_array():
 
     draw_rectangle(arr, ['red' for _ in range(len(arr))])
 
+
 # DRAWING THE ARRAY ELEMENTS AS RECTANGLES
 def draw_rectangle(arr, colorArray):
     canvas.delete("all")
@@ -44,7 +45,21 @@ def draw_rectangle(arr, colorArray):
         canvas.create_text(x0 + 2, y0, anchor=SW, text=str(arr[i]))
 
     root.update_idletasks()
-    
+
+
+def sorting():
+    global arr
+    arr = []
+    lowest = int(lowest_Entry.get())
+    highest = int(highest_Entry.get())
+    size = int(arrsize_Entry.get())
+
+    for i in range(size):
+        arr.append(random.randrange(lowest, highest + 1))
+
+    bubble_sort(arr, draw_rectangle, sortingspeed.get())
+
+
 # GUI CODING PART
 options_frame = Frame(root, width=700, height=200, bg='orange')
 options_frame.pack(pady=20)
@@ -67,5 +82,14 @@ Button(options_frame, text="Start Sorting", command=sorting, bg='red', fg='white
 
 lowest_Entry = Scale(options_frame, from_=5, to=20, resolution=1, orient=HORIZONTAL, label="Lower Limit", bg='orange')
 lowest_Entry.grid(row=1, column=0, padx=5, pady=5)
+
+highest_Entry = Scale(options_frame, from_=20, to=100, resolution=1, orient=HORIZONTAL, label="Upper Limit", bg='orange')
+highest_Entry.grid(row=1, column=1, padx=5, pady=5)
+
+arrsize_Entry = Scale(options_frame, from_=3, to=25, resolution=1, orient=HORIZONTAL, label="Array size", bg='orange')
+arrsize_Entry.grid(row=1, column=2, padx=5, pady=5)
+
+Button(options_frame, text="Generate Array", command=Generate_array, bg='blue', fg='white', height=2).grid(row=1, column=3,
+                                                                                                          padx=10, pady=10)
 
 root.mainloop()
